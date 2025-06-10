@@ -6,7 +6,7 @@
     "all": "yarn lint && yarn clean && yarn build",
     "clean": "rimraf dist/",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix"
@@ -50,6 +50,7 @@
     "vite": "^2.9.5"
   },
   "dependencies": {
-    "@replit/codemirror-vim": "^6.3.0"
+    "@replit/codemirror-vim": "^6.3.0",
+    "firebase": "^11.9.0"
   }
 }

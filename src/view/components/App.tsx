@@ -3,6 +3,7 @@ import 'simplebar-react/dist/simplebar.min.css';
 import { deckACodeAtom, deckACompileTimeAtom, deckACueStatusAtom, deckAErrorAtom, deckAHasEditAtom, deckBCodeAtom, deckBCompileTimeAtom, deckBCueStatusAtom, deckBErrorAtom, deckBHasEditAtom, deckMaximizedAtom } from '../stores/atoms/deck';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import { AssetList } from './AssetList';
+import { CollaborationModal } from './CollaborationModal';
 import { ContextMenu } from './ContextMenu';
 import { Deck } from './Deck';
 import { DeckKnobs } from './DeckKnobs';
@@ -22,6 +23,7 @@ import { ThemeVars } from '../themes/ThemeVars';
 import { XFader } from './XFader';
 import { themes } from '../themes/themes';
 import { useAnalyserSubscribers } from '../stores/hooks/useAnalyserSubscribers';
+import { useCollaborationSubscribers } from '../stores/hooks/useCollaborationSubscribers';
 import { useDeckSubscribers } from '../stores/hooks/useDeckSubscribers';
 import { useMidiSubscribers } from '../stores/hooks/useMidiSubscribers';
 import { useSettings } from '../stores/hooks/useSettings';
@@ -185,6 +187,7 @@ export function OutOfContextApp() {
   const maximizedDeck = useAtomValue(deckMaximizedAtom);
 
   useAnalyserSubscribers(mixer);
+  useCollaborationSubscribers();
   useMidiSubscribers(MIDIMAN);
   useSettingsSubscribers(SETTINGSMAN);
   useDeckSubscribers(deckA, deckA, deckB);
@@ -319,6 +322,7 @@ export function OutOfContextApp() {
 
         <SettingsModal />
         <HelpModal />
+        <CollaborationModal />
 
         <PlayOverlay />
         <ContextMenu />

@@ -67,7 +67,7 @@ export const defaultSettings: Settings = {
   waveformColor: '#ffffff',
   theme: 'monokaiSharp',
   headerItems: 'logo,transport,time,beat-number,bpm,nudge',
-  headerIcons: 'recorder,midi,settings,help,github',
+  headerIcons: 'collab,recorder,midi,settings,help,github',
   deckBShow: true,
   preferPixelFonts: false,
   editorFont: '14px/18px "Roboto Mono", monospace',

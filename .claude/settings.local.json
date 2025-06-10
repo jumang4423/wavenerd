@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yarn add firebase)",
+      "Bash(yarn build)",
+      "Bash(yarn dev)",
+      "Bash(grep:*)",
+      "Bash(npm run dev:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}

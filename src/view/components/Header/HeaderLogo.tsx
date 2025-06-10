@@ -134,9 +134,15 @@ export function HeaderLogo() {
     <Logo onClick={handleClick}>
       {currentFunctionIndex === 1 ? (
         <img
-          src="/forest.jpg"
+          src="/forest.gif"
           alt="Wavenerd"
-          style={{ width: "140px", height: "40px" }}
+          style={{
+            width: "140px",
+            height: "28px",
+            borderRadius: "1px",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
           loading="lazy"
         />
       ) : (

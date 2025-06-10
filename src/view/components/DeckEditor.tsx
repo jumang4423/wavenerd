@@ -1,9 +1,10 @@
 import { EditorView, KeyBinding, keymap } from '@codemirror/view';
+import { EditorState } from '@codemirror/state';
 import { defaultKeymap } from '@codemirror/commands';
 import { cpp } from '@codemirror/lang-cpp';
 import { vim, Vim } from '@replit/codemirror-vim';
 import ReactCodeMirror, { Prec, ReactCodeMirrorRef } from '@uiw/react-codemirror';
-import { forwardRef, useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import SimpleBar from 'simplebar-react';
 import { backlayer } from '../codemirror/backlayer';

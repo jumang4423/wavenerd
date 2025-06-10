@@ -15,6 +15,7 @@ import { DeckLibrary } from './DeckLibrary';
 import { DeckBraceJumpMap } from './DeckBraceJumpMap';
 import { deckMaximizedAtom } from '../stores/atoms/deck';
 import { StuffContext } from '../StuffContext';
+import { COLLABMAN } from '../../CollaborationManager';
 
 // == styles =======================================================================================
 const fadeOut = keyframes`
@@ -162,8 +163,13 @@ export const Deck = forwardRef(({
         await handleCompile();
       }
       deck.applyCue();
+      
+      // Trigger collaboration apply event if connected
+      if (COLLABMAN.isConnected()) {
+        COLLABMAN.triggerApply(storageKeyName, false).catch(console.error);
+      }
     },
-    [handleCompile],
+    [handleCompile, storageKeyName],
   );
 
   const handleApplyImmediately = useCallback(
@@ -172,8 +178,13 @@ export const Deck = forwardRef(({
         await handleCompile();
       }
       deck.applyCueImmediately();
+      
+      // Trigger collaboration apply event if connected
+      if (COLLABMAN.isConnected()) {
+        COLLABMAN.triggerApply(storageKeyName, true).catch(console.error);
+      }
     },
-    [handleCompile],
+    [handleCompile, storageKeyName],
   );
 
   const refBraceJumpMap = useRef<{ update: (index: number) => void }>(null);

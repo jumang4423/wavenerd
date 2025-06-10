@@ -10,10 +10,12 @@ import IconMute from '~icons/mdi/volume-mute';
 import IconPlay from '~icons/mdi/play';
 import IconMaximize from '~icons/mdi/arrow-expand-all';
 import IconMinimize from '~icons/mdi/arrow-collapse-all';
+import IconAccountMultiple from '~icons/mdi/account-multiple';
 import { ThemeVars } from '../themes/ThemeVars';
 import { useMidiValue } from '../stores/hooks/useMidiValue';
 import { useSettings } from '../stores/hooks/useSettings';
 import { deckMaximizedAtom } from '../stores/atoms/deck';
+import { collaborationStatusAtom, collaborationFriendNameAtom } from '../stores/atoms/collaboration';
 
 // == styles =======================================================================================
 const StyleIcon = css`
@@ -100,6 +102,11 @@ const StyledIconMinimize = styled(IconMinimize)`
   ${StyleIconButton}
 `;
 
+const StyledIconCollab = styled(IconAccountMultiple)`
+  ${StyleIcon}
+  color: #4CAF50;
+`;
+
 const animationBlink = (altColor: string, duration: string, timing: string) => css`
   animation: ${keyframes`
     0% { color: ${ThemeVars.fore}; }
@@ -149,6 +156,11 @@ const TextApplyingBlink = styled(Text)`
 
 const TextErrorBlink = styled(Text)`
   ${animationBlink(ThemeVars.error, '0.5s', 'step-start')}
+`;
+
+const CollabText = styled(Text)`
+  color: #4CAF50;
+  font-size: 12px;
 `;
 
 const Root = styled.div`
@@ -210,8 +222,11 @@ export function DeckStatusBar({
   const hasEdit = useAtomValue(hasEditAtom);
   const gainValue = useMidiValue(gainParamName);
   const maximizedDeck = useAtomValue(deckMaximizedAtom);
+  const collaborationStatus = useAtomValue(collaborationStatusAtom);
+  const friendName = useAtomValue(collaborationFriendNameAtom);
   
   const isMaximized = maximizedDeck === storageKeyName;
+  const isCollaborating = (collaborationStatus === 'connected' || collaborationStatus === 'hosting');
 
   const errorFirstLine = useMemo(() => {
     return error?.split('\n')[0];
@@ -309,12 +324,25 @@ export function DeckStatusBar({
       </Content>
     );
   } else {
-    content = (
-      <Content>
-        <StyledIconPlay />
-        <TextGray>Playing</TextGray>
-      </Content>
-    );
+    if (isCollaborating) {
+      const statusText = collaborationStatus === 'hosting' 
+        ? `Hosting • Deck ${storageKeyName.toUpperCase()}`
+        : `Collab with ${friendName || 'friend'} • Deck ${storageKeyName.toUpperCase()}`;
+      
+      content = (
+        <Content>
+          <StyledIconCollab />
+          <CollabText>{statusText}</CollabText>
+        </Content>
+      );
+    } else {
+      content = (
+        <Content>
+          <StyledIconPlay />
+          <TextGray>Playing</TextGray>
+        </Content>
+      );
+    }
   }
 
   return (

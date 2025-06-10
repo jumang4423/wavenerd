@@ -20,6 +20,7 @@ import { HeaderIconDeckB } from './HeaderIconDeckB';
 import { HeaderIconUnknown } from './HeaderIconUnknown';
 import { HeaderIconFullscreen } from './HeaderIconFullscreen';
 import { HeaderIconVisualizer } from './HeaderIconVisualizer';
+import { HeaderIconCollab } from './HeaderIconCollab';
 import { HeaderBarsGrid } from './HeaderBarsGrid';
 import { HeaderTimeHMS } from './HeaderTimeHMS';
 import { HeaderCatjam } from './HeaderCatjam';
@@ -130,6 +131,8 @@ export function Header({ className }: { className?: string }) {
             return <HeaderIconFullscreen key={i} />;
           } else if (item === 'visualizer') {
             return <HeaderIconVisualizer key={i} />;
+          } else if (item === 'collab') {
+            return <HeaderIconCollab key={i} />;
           } else {
             return <HeaderIconUnknown key={i} name={item} />;
           }

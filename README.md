@@ -6,3 +6,4 @@
 
 - deck A/B max/minimization
 - vim mode
+- title bar scary face
